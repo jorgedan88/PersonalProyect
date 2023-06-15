@@ -1,0 +1,1 @@
+Bienvenido a AJAX con el archivo .TXT funcionando!

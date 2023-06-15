@@ -1,0 +1,20 @@
+El objeto "XMLHttpRequest" nos permite hacer uso de AJAX y realizar una petición hacia el BEND usando métodos GET/POST.
+Este objeto no sirve para navegadores muy antiguos, si se esta trabajando sobre un browser antiguo se utiliza la clase "ActivexObject"
+
+EJEMPLO:
+
+new XMLHttpRequest();
+new ActiveXObject("Microsoft.XMLHTTP");
+entonces podemos utilizar instancias de estas dos clases para manejar las peticiones http-equiv
+
+Como saber que clase usar?
+if(window.XMLHttpRequest) si es TRUE utilizamos la clase XMLHttpRequest() si no  quiere decir que estamos en un browser mas antiguo
+y debemos utilizar la clase ActiveXObject
+
+
+2*
+FUNCIÓN QUE REALIZA EL REQUEST ASINCRÓNICO, PARÁMETROS QUE RECIBE LA FUNCIÓN:
+1 - URL: Acá tenemos la URL donde queremos realizar el REQUEST. 
+2 - MÉTODO: Acá vemos si se puede enviar por GET o POST.
+3 - FUNCIÓN (FuncionA): Que es lo que va a hacer con la información que obtiene en el caso que obtenga información,
+    como por ejemplo mostrar el contenido en el BOM (Contenido que se renderizar en la pagina).

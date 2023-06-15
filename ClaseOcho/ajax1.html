@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo Ajax</title>
+</head>
+<script>
+
+    var peticionHttp;
+        function inicializar_XHR() {
+            if (window.XMLHttpRequest) {
+            //navegador "moderno"
+            console.log("esta en un navegador moderno");
+            peticionHttp = new XMLHttpRequest();
+            } else {
+            //navegador antiguo 
+            console.log("esta en un navegador antiguo");
+            peticionHttp = new ActiveXObject("Microsoft.XMLHTTP")
+            }
+    }
+
+    function realizarPeticion(url, metodo, funcionA) {
+
+        peticionHttp.onreadystatechange = funcionA
+        peticionHttp.open(metodo, url, true);
+        peticionHttp.send(null);
+    }
+
+    function descargarArchivo() {
+        //inicializamos el objeto Http
+        inicializar_XHR();
+        //invocamos a la funcion que realiza el request
+        realizarPeticion('archivo.txt', 'GET', funcActuadora);
+    }
+
+    function funcActuadora() {
+        console.log("Estado de la peticion http:" + peticionHttp.readyState);
+
+        if (peticionHttp.readyState == 4) { 
+            if (peticionHttp.status == 200) {
+                document.write(peticionHttp.responseText);
+            }
+        }
+    }
+
+
+    window.onload = descargarArchivo
+</script>
+
+<body>
+    <h1>
+        introduccion a AJAX
+    </h1>
+</body>
+
+</html>

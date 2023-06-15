@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo Axaj</title>
+</head>
+
+<script> //Codigo JS enbebido en el HTML, NO SE HACE ASI!!!, la buena practica es hacer un archivo JS y vincularlo. 
+
+    var peticionHttp; //se crea la variable para guardar una isntancia de HTTP Request o ActiveXObject
+        function inicializar_XHR() { 
+            if (window.XMLHttpRequest) {
+                console.log("este es un navegador moderno");
+                peticionHttp = new XMLHttpRequest(); 
+            }else 
+            {
+                console.log("este es un navegador antiguo");
+                peticionHttp = new ActiveXObject("Microsoft.XMLHTTP")
+            }
+    }
+
+    function realizarPeticion(url, metodo, funcionA){ //2*
+        peticionHttp.onreadystatechange = funcionA // Aca se indica que el parametro fucionA quede registrada al evento peticionHttp.onreadystatchange, a medida que este valla combiando se hira ejecutando el parametro
+        peticionHttp.open(metodo, url, true);
+        peticionHttp.send(null);
+    }
+
+    function descargarArchivo(){
+
+        inicializar_XHR();
+        realizarPeticion('archivo.txt', 'GET', funcActuadora);
+    }
+    function funcActuadora(){
+        console.log("El estado de la peticion es " + peticionHttp.readyState);
+    
+
+        if(peticionHttp.readyState == 4){
+            if (peticionHttp.status == 200) {
+            document.write(peticionHttp.responseText);
+            }
+        }
+    }
+
+    window.onload = descargarArchivo 
+
+</script>
+
+
+<body>
+    <h1>Introduccion a Ajax</h1>
+</body>
+
+</html>
